@@ -13,10 +13,10 @@ export default function handler(
   res.status(200).json([
     {
       img: {
-        alt: "lotrem episom ",
+        alt: "lotrem episom  ",
         image: "/images/1.png",
       },
-      description: "lorem episom ",
+      description: "lorem episom 3xl",
       inStock: Math.floor(Math.random() * 200),
     },
   ]);
