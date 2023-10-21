@@ -13,46 +13,21 @@ export default NextAuth({
         password: { label: "Password", type: "password", value: "m1@g.com" },
       },
 
-      // await User.insertMany([
-      //   {
-      //     name: "m1@g.com",
-      //     email: "m1@g.com",
-      //     password: "m1@g.com",
-      //     isAdmin: false,
-      //   },
-      //   {
-      //     name: "a1@g.com",
-      //     email: "a1@g.com",
-      //     password: "a1@g.com",
-      //     isAdmin: true,
-      //   },
-      // ]);
       authorize: async (credentials, req): Promise<any> => {
         await db.connect();
-        console.log("Authorize , req ", req.body.username);
-
-        const x = new User({
-          name: "admin.com",
-          email: "admin.com",
-          password: "admin.com",
-          isAdmin: true,
-        });
-        console.log("AAA");
-
-        await x.save();
-        console.log("BBB");
+        console.log("Authorize , req.body.username ", req.body.username);
 
         let user;
 
         try {
           user = await User.findOne({
-            name: "m1@g.com", //req?.body?.username,
+            name: req?.body?.username,
           });
         } catch (error) {
           console.log(error);
         }
         let person;
-        console.log("CCC");
+
         console.log("user from db is : ", user);
 
         if (user) {
@@ -84,7 +59,7 @@ export default NextAuth({
     //   },
 
     async redirect({ url, baseUrl }) {
-      return "/profile";
+      return "/user/profile";
 
       // Allows relative callback URLs
       if (url.startsWith("/")) return `${baseUrl}${url}`;

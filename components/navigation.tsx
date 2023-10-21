@@ -18,7 +18,7 @@ export default function Navigation({}: Props) {
         {session ? (
           <>
             <li className="mx-3 text-white px-3" key={"profile"}>
-              <Link href={"/profile"}>Profile</Link>
+              <Link href={"/user/profile"}>Profile</Link>
             </li>
             <li className="mx-3 text-white px-3" key={"logout"}>
               <Link href={"#"} onClick={() => signOut()}>
