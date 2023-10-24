@@ -1,19 +1,24 @@
 import User from "@/models/user";
 import db from "@/utils/db";
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-export default NextAuth({
+const options: NextAuthOptions = {
+  // Not working Why I dont Know Yet !!!  authorize: async (credentials:any ) => {
+  //   return await  Promise.resolve(true);
+  // },
   providers: [
     CredentialsProvider({
+      id: "user-pass",
       // The name to display on the sign-in form (e.g., 'Sign in with...')
-      name: "User & Password",
+      name: "User-Password",
       credentials: {
         username: { label: "Username", type: "text", value: "m1@g.com" },
         password: { label: "Password", type: "password", value: "m1@g.com" },
       },
 
       authorize: async (credentials, req): Promise<any> => {
+        console.log("User Pass Auth");
         await db.connect();
         console.log("Authorize , req.body.username ", req.body.username);
 
@@ -48,6 +53,20 @@ export default NextAuth({
         }
       },
     }),
+    CredentialsProvider({
+      id: "otp",
+      // The name to display on the sign-in form (e.g., 'Sign in with...')
+      name: "OTP",
+      credentials: {
+        phone: { label: "Phone", type: "text", value: "09027040652" },
+      },
+
+      authorize: async (credentials, req): Promise<any> => {
+        console.log("OTP Auth", credentials, req);
+
+        return false;
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
@@ -68,4 +87,6 @@ export default NextAuth({
       return baseUrl;
     },
   },
-});
+};
+
+export default NextAuth(options);

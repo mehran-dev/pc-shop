@@ -1,9 +1,10 @@
-import Navigation from "../navigation";
+import AdminPanelNavigation from "./navigations/adminPanelNavigation";
+import Navigation from "./navigations/navigation";
 
 export default function AdminLayout({ children }: any) {
   return (
     <>
-      AdminNavigation
+      <AdminPanelNavigation />
       <div className="px-16">
         <main>{children}</main>
       </div>

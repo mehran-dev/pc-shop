@@ -1,4 +1,4 @@
-import Navigation from "../navigation";
+import Navigation from "./navigations/navigation";
 
 export default function Layout({ children }: any) {
   return (
